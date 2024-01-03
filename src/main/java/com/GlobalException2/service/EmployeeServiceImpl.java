@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.GlobalException2.Exception.NoResourceFoundException;
 import com.GlobalException2.dao.EmployeeDao;
 import com.GlobalException2.model.Employee;
 
@@ -58,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
       
 	@Override
 	public Employee getEmployeeById(int id) {
-		return employeeDao.findById(id).get();
+		return employeeDao.findById(id).orElseThrow(() -> new NoResourceFoundException("Given id not present in database"));
 	}
 
 	@Override
